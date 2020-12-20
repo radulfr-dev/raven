@@ -4,21 +4,24 @@
   "description": "A tool to help theAgency's customer service team address customer concerns",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon main.js"
   },
   "author": "Cameron Raw",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.21.0",
+    "bcrypt": "^5.0.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
+    "dotenv": "^8.2.0",
     "mocha": "^8.2.1"
   },
   "nodemonConfig": {
-      "ext": "js, ejs, css, json"
+    "ext": "js, ejs, css, json"
   }
 }

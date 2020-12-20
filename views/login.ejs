@@ -1,0 +1,33 @@
+<%- include('partials/header'); -%>
+
+<div class="container">
+    <h1>Login</h1>
+    <form action="/login" method="POST">
+        <div class="form-control container-fluid">
+            <div class="row">
+                <div class="col">
+                    <label for="email">eMail</label>
+                </div>
+                <div class="col">
+                    <input type="text" name="email" id="login-email">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="password">Password</label>
+                </div>
+                <div class="col">
+                    <input type="text" name="password" id="login-password">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button type="submit">Login</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<%- include('partials/footer'); -%>

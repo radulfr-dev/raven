@@ -1,8 +1,6 @@
-FROM alpine
+FROM node:slim
 
 LABEL maintainer="cameron@theagency.io"
-
-RUN apk add --update nodejs nodejs-npm
 
 COPY . /src
 
@@ -14,4 +12,5 @@ RUN npm install -g nodemon
 
 EXPOSE 8080
 
-ENTRYPOINT ["nodemon", "./main.js"]
+#ENTRYPOINT ["node", "./main.js"]
+CMD npm start
