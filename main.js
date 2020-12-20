@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({extended: false}));
 
 app.get('/', function(req, res){
@@ -22,7 +23,7 @@ app.post('/login', function(req, res){
 
 app.post('/register', async function(req, res){
     try {
-        const hashedPassword = async bcrypt.hash(req.body.password, 10);
+        //const hashedPassword = async bcrypt.hash(req.body.password, 10);
         // TODO: Add user to database here
 
         res.redirect('/login');
@@ -31,6 +32,6 @@ app.post('/register', async function(req, res){
     }
 });
 
-app.listen(8080, function(){
-    console.log('Server is live on 8080');
+app.listen(3000, function(){
+    console.log('Server is live on 3000');
 });

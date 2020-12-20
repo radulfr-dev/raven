@@ -1,0 +1,55 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: #141414;
+}
+body .body-overlay {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: #141414;
+  opacity: 0.9;
+  z-index: 10;
+}
+body .container, body .container-fluid {
+  z-index: 20;
+  position: relative;
+}
+body .logo-row .col {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+body .logo-row .col h1 {
+  font-family: "Baloo 2", cursive;
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 20px;
+}
+body .main-menu .overview {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border-radius: 15px;
+  text-align: center;
+  padding: 15px;
+  font-family: "Baloo 2", cursive;
+}
+body .main-menu a {
+  text-align: center;
+  display: block;
+  background-color: #3c3c3c;
+  margin: 15px;
+  padding: 15px;
+  color: white;
+  text-decoration: none;
+  font-family: "Baloo 2", cursive;
+  border-radius: 15px 50px;
+}
+body .main-menu a:hover {
+  background-color: orange;
+}
+
+/*# sourceMappingURL=styles.css.map */
