@@ -10,7 +10,7 @@ app.use(express.urlencoded({extended: false}));
 
 app.use(express.json());
 
-app.get('/', function(req, res){
+app.get('/', authenticateToken, function(req, res){
     res.render('index');
 });
 
@@ -24,24 +24,33 @@ app.get('/register', function(req, res){
 
 app.post('/login', async function(req, res){
     const username = req.body.username;
-//    const user = { name: username };
-//    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-//    res.json({ accessToken: accessToken });
     const usernameMatches = await ravenDb.checkDatabaseForUsername(username);
 
     if(usernameMatches.length === 0){
         return res.status(400).send('Cannot find user');
     }
-
-    const user = usernameMatches[0];
+    
+    const user = {
+        username: usernameMatches[0].username,
+        password: usernameMatches[0].password,
+        role: usernameMatches[0].role,
+        email: usernameMatches[0].email,
+        timeRegistered: usernameMatches[0]['time_registered'],
+        lastLogin: usernameMatches[0]['last_login'],
+        authorized: usernameMatches[0].authorized
+    };
 
     try{
         if(await bcrypt.compare(req.body.password, user.password)){
-            res.send('Success');
+            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+            //res.json({ accessToken: accessToken });
+            res.cookie('auth', accessToken, { httpOnly: true, secure: false });
+            res.redirect('/');
         }else{
             res.send('Not Allowed');
         }
-    }catch{
+    }catch(err){
+        console.log(err);
         res.status(500).send();
     }
 
@@ -49,8 +58,8 @@ app.post('/login', async function(req, res){
 });
 
 function authenticateToken(req, res, next){
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
+
+    const token = req.cookies['auth'];
     if(token == null) return res.sendStatus(401);
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
@@ -65,19 +74,15 @@ app.post('/register', async function(req, res){
         //const hashedPassword = async bcrypt.hash(req.body.password, 10);
         // TODO: Add user to database here
         //
-        console.log(req.body);
 
         const salt = await bcrypt.genSalt();
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
-        console.log(salt);
-        console.log(hashedPassword);
         const user = {
             username: req.body.username,
             password: hashedPassword,
             role: req.body.role,
             email: req.body.email
         }
-        console.log(ravenDb.addUserToDatabase(user));
         res.redirect('/login');
     }catch(err){
         console.log(err);
