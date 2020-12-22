@@ -59,6 +59,7 @@ app.post('/register', async function(req, res){
             role: req.body.role,
             email: req.body.email
         }
+        console.log(ravenDb.addUserToDatabase(user));
         res.redirect('/login');
     }catch(err){
         console.log(err);

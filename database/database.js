@@ -24,23 +24,13 @@ function DatabaseController(){
 
     }
 
-    function addUserToDatabase(userObject){
+    async function addUserToDatabase(userObject){
 
         connection.connect();
 
-        connection.query(`INSERT INTO users (username, password, role, email, authorizaton) VALUES (${userObject.username}, ${userObject.password}, ${userObject.role}, ${userObject.email}, 1)`, function(error, results, fields){
-            if(error){
-                return {
-                    'status': 'error',
-                    'errorMessage': error
-                };
-            }
+        const rows = await connection.query(`INSERT INTO users (username, password, role, email, authorized) VALUES ("${userObject.username}", "${userObject.password}", "${userObject.role}", "${userObject.email}", 1)`);
 
-            return {
-                'status': 'success',
-                'message': results.changedRows
-            };
-        });
+        return rows;
 
         connection.end();
     }
@@ -48,3 +38,5 @@ function DatabaseController(){
     return { addUserToDatabase };
 
 }
+
+module.exports = DatabaseController();
