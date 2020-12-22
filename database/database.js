@@ -7,22 +7,13 @@ let connection = mysql.createConnection({
     database: process.env.DB_NAME
 });
 
+connection.connect((err) => {
+    if(err){
+        console.log(err.message);
+    }
+});
 
 function DatabaseController(){
-
-    function testConnection(){
-        //
-        // Test connection
-        connection.connect();
-
-        connection.query('SELECT * FROM test', function(error, results, fields){
-            if(error) throw error;
-            console.log(results);
-        });
-
-        connection.end();
-
-    }
 
     async function addUserToDatabase(userObject){
 
@@ -30,12 +21,29 @@ function DatabaseController(){
 
         const rows = await connection.query(`INSERT INTO users (username, password, role, email, authorized) VALUES ("${userObject.username}", "${userObject.password}", "${userObject.role}", "${userObject.email}", 1)`);
 
-        return rows;
-
         connection.end();
+
+        return rows;
     }
 
-    return { addUserToDatabase };
+    async function checkDatabaseForUsername(username){
+        try {
+            const response = await new Promise((resolve, reject) => {
+                const query = `SELECT * FROM users WHERE username = "${username}"`;
+
+                connection.query(query, (err, results) => {
+                    if(err) reject(new Error(err.message));
+                    resolve(results);
+                });
+            });
+            console.log(response);
+            return response;
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+    return { addUserToDatabase, checkDatabaseForUsername };
 
 }
 

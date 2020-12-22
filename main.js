@@ -22,12 +22,30 @@ app.get('/register', function(req, res){
     res.render('register');
 });
 
-app.post('/login', function(req, res){
+app.post('/login', async function(req, res){
     const username = req.body.username;
-    const user = { name: username };
+//    const user = { name: username };
+//    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+//    res.json({ accessToken: accessToken });
+    const usernameMatches = await ravenDb.checkDatabaseForUsername(username);
 
-    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-    res.json({ accessToken: accessToken });
+    if(usernameMatches.length === 0){
+        return res.status(400).send('Cannot find user');
+    }
+
+    const user = usernameMatches[0];
+
+    try{
+        if(await bcrypt.compare(req.body.password, user.password)){
+            res.send('Success');
+        }else{
+            res.send('Not Allowed');
+        }
+    }catch{
+        res.status(500).send();
+    }
+
+
 });
 
 function authenticateToken(req, res, next){
