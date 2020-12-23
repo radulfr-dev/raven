@@ -2,38 +2,88 @@
 
 <div class="container">
 
-<%- include('partials/ravenHeader'); -%>
+    <%- include('partials/ravenHeader'); -%>
 
-<div class="top-up-menu row">
+    <div class="top-up-menu row">
 
-    <div class="col">
-        <form>
-            <div class="form-group">
-                <label for="post-url">Post URL</label>
-                <input type="text" class="form-control" id="post-url">
-            </div> 
-            <div class="form-group">
-                <label for="top-up-mode">Top-Up Mode</label>
-                <select class="form-control" id="top-up-mode">
-                    <option disabled selected value>Select an option</option>
-                    <option class="top-up-mode-option">Subscription</option>
-                    <option class="top-up-mode-option">Use Asgardian Services</option>
-                    <option class="top-up-mode-option">Manual</option>
-                </select>
-            </div>
-            <div class="form-options form-group" id="subscription">
-                <h1>Subscription</h1>
-            </div>
-            <div class="form-options form-group" id="use-asgardian-services">
-                <h1>Use Asgardian Services</h1>
-            </div>
-            <div class="form-options form-group" id="manual">
-                <h1>Manual</h1>
-            </div>
-        </form>
+        <div class="col">
+            <form>
+                <div class="form-group">
+                    <label for="post-url">Post URL</label>
+                    <input type="text" class="form-control" id="post-url">
+                </div> 
+                <div class="form-group">
+                    <label for="top-up-mode">Top-Up Mode</label>
+                    <select class="form-control" id="top-up-mode">
+                        <option disabled selected value>Select an option</option>
+                        <option class="top-up-mode-option">Subscription</option>
+                        <option class="top-up-mode-option">Use Asgardian Services</option>
+                        <option class="top-up-mode-option">Manual</option>
+                    </select>
+                </div>
+                <div class="container-fluid form-options form-group" id="subscription">
+                    <div class="row">
+                        <div class="col">
+                            <h1>Subscription</h1>
+                            <p>Best used when the profile has received little to no services.</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-username">Profile Username</label>
+                            <input type="text" class="form-control" id="profile-username"></input>
+                            <button class="btn btn-primary" id="find-subscriptions">Find Subscriptions</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid form-options form-group" id="use-asgardian-services">
+                    <div class="row">
+                        <div class="col">
+                            <h1>Use Asgardian Services</h1>
+                            <p>Send out automatically dripfed top ups using our current, live services.</p>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <div class="row">
+                            <div class="col">
+                                <label for="asgardian-likes-quantity">No. of likes</label>
+                                <input type="text" class="form-control" id="asgardian-likes-quantity" value="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <div class="row">
+                            <div class="col">
+                                <label for="asgardian-views-quantity">No. of views</label>
+                                <input type="text" class="form-control" id="asgardian-views-quantity" value="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <div class="row">
+                            <div class="col">
+                                <label for="asgardian-saves-quantity">No. of saves</label>
+                                <input type="text" class="form-control" id="asgardian-saves-quantity" value="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <div class="row">
+                            <div class="col">
+                                <label for="asgardian-impressions-quantity">No. of impressions</label>
+                                <input type="text" class="form-control" id="asgardian-impressions-quantity" value="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="asgardian-button-wrapper">
+                        <button class="btn btn-primary" id="asgardian-services-order">Order Asgardian Services</button>
+                    </div>
+                </div>
+                <div class="form-options form-group" id="manual">
+                    <h1>Manual</h1>
+                </div>
+            </form>
+        </div>
+
     </div>
-
-</div>
 
 </div>
 

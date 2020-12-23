@@ -8,6 +8,14 @@
                 display: none;
                 opacity: 0.0;
                 color: white;
+                margin-top: 15px;
+            }
+            .asgardian-button-wrapper {
+                display: flex;
+                justify-content: center;
+                flex-direction: row;
+                align-items: center;
+                margin-bottom: 15px;
             }
         }
     }
