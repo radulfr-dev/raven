@@ -80,8 +80,8 @@ function Authentication(){
             console.log(databaseResponse);
             next();
         }catch(err){
-            console.log(err);
-            res.redirect('/register');
+            let errorString = encodeURIComponent(err.message);
+            res.redirect('/register?error=true&message=' + errorString);
         }
     }
 

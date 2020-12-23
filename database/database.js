@@ -25,10 +25,9 @@ function DatabaseController(){
                     resolve(results);
                 });
             });
-            console.log(response);
             return response;
         }catch(error){
-            console.log(error);
+            throw error;
         }
     }
 
@@ -42,10 +41,9 @@ function DatabaseController(){
                     resolve(results);
                 });
             });
-            console.log(response);
             return response;
         }catch(error){
-            console.log(error);
+            return error;
         }
     }
 

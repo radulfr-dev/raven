@@ -36,6 +36,9 @@ app.get('/logout', authentication.logoutUser, function(req, res){
 });
 
 app.get('/register', authentication.checkUserIsAdmin, function(req, res){
+    res.locals.errorQueries = {
+        query: req.query
+    };
     res.render('register');
 });
 

@@ -2,6 +2,25 @@
 
 <div class="container">
     <h1>Register</h1>
+
+    <% 
+    
+     if(errorQueries.query['error']){
+
+        %>
+
+        <div class="alert alert-danger" role="alert">
+        
+            <%= errorQueries.query['message'] %>
+        
+        </div>
+
+        <%
+
+     }
+    
+    %>
+
     <form action="/register" method="POST">
         <div class="form-control container-fluid">
             <div class="row">
