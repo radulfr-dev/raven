@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const ravenDb = require('./database/database.js');
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 app.set('view engine', 'ejs');
@@ -21,11 +20,31 @@ app.get('/', checkUserIsAuthorized, function(req, res){
 });
 
 app.get('/login', function(req, res){
-    res.render('login');
+    if(req.session.user){
+        res.redirect('/');
+    }else{
+        res.render('login');
+    }
+});
+
+app.get('/logout', function(req, res){
+    if(req.session.user){
+        delete req.session.user;
+    }
+    res.redirect('/login');
+    
 });
 
 app.get('/register', function(req, res){
-    res.render('register');
+    if(req.session.user && req.session.user['role'] === 'admin'){
+        res.render('register');
+    }
+    if(req.session.user && req.session.user['role'] === 'normal'){
+        res.redirect('/');
+    }
+    if(!req.session.user){
+        res.redirect('/login');
+    }
 });
 
 app.post('/login', async function(req, res){
@@ -63,7 +82,7 @@ app.post('/login', async function(req, res){
 
 function checkUserIsAuthorized(req, res, next){
 
-    if(!req.session.user) return res.sendStatus(401);
+    if(!req.session.user && !process.env.DEV) return res.sendStatus(401);
 
     next();
 
@@ -71,9 +90,6 @@ function checkUserIsAuthorized(req, res, next){
 
 app.post('/register', async function(req, res){
     try {
-        //const hashedPassword = async bcrypt.hash(req.body.password, 10);
-        // TODO: Add user to database here
-        //
 
         const salt = await bcrypt.genSalt();
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
@@ -83,6 +99,7 @@ app.post('/register', async function(req, res){
             role: req.body.role,
             email: req.body.email
         }
+        ravenDb.addUserToDatabase(user);
         res.redirect('/login');
     }catch(err){
         console.log(err);

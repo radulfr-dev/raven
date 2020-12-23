@@ -16,14 +16,20 @@ connection.connect((err) => {
 function DatabaseController(){
 
     async function addUserToDatabase(userObject){
+        try {
+            const response = await new Promise((resolve, reject) => {
+                const query = `INSERT INTO users (username, password, role, email, authorized) VALUES ("${userObject.username}", "${userObject.password}", "${userObject.role}", "${userObject.email}", 1)`;
 
-        connection.connect();
-
-        const rows = await connection.query(`INSERT INTO users (username, password, role, email, authorized) VALUES ("${userObject.username}", "${userObject.password}", "${userObject.role}", "${userObject.email}", 1)`);
-
-        connection.end();
-
-        return rows;
+                connection.query(query, (err, results) => {
+                    if(err) reject(new Error(err.message));
+                    resolve(results);
+                });
+            });
+            console.log(response);
+            return response;
+        }catch(error){
+            console.log(error);
+        }
     }
 
     async function checkDatabaseForUsername(username){

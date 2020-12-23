@@ -27,7 +27,22 @@ body {
             text-transform: uppercase;
             text-align: center;
             letter-spacing: 20px;
-    }}
+        }
+        &:nth-child(3){
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            .logout-button {
+                display: inline-block;
+                padding: 15px;
+                background-color: orange;
+                border-radius: 15px;
+                color: black;
+                text-decoration: none;
+            }
+        }
+    }
     .main-menu {
         .overview {
             background-color: rgba(0,0,0,0.7);

@@ -29,6 +29,20 @@ body .logo-row .col h1 {
   text-align: center;
   letter-spacing: 20px;
 }
+body .logo-row .col:nth-child(3) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+body .logo-row .col:nth-child(3) .logout-button {
+  display: inline-block;
+  padding: 15px;
+  background-color: orange;
+  border-radius: 15px;
+  color: black;
+  text-decoration: none;
+}
 body .main-menu .overview {
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
