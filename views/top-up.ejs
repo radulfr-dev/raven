@@ -4,8 +4,40 @@
 
 <%- include('partials/ravenHeader'); -%>
 
+<div class="top-up-menu row">
 
+    <div class="col">
+        <form>
+            <div class="form-group">
+                <label for="post-url">Post URL</label>
+                <input type="text" class="form-control" id="post-url">
+            </div> 
+            <div class="form-group">
+                <label for="top-up-mode">Top-Up Mode</label>
+                <select class="form-control" id="top-up-mode">
+                    <option disabled selected value>Select an option</option>
+                    <option class="top-up-mode-option">Subscription</option>
+                    <option class="top-up-mode-option">Use Asgardian Services</option>
+                    <option class="top-up-mode-option">Manual</option>
+                </select>
+            </div>
+            <div class="form-options form-group" id="subscription">
+                <h1>Subscription</h1>
+            </div>
+            <div class="form-options form-group" id="use-asgardian-services">
+                <h1>Use Asgardian Services</h1>
+            </div>
+            <div class="form-options form-group" id="manual">
+                <h1>Manual</h1>
+            </div>
+        </div>
+    </div>
 
 </div>
+
+</div>
+
+<script src="/js/top-up.js" type="text/javascript">
+</script>
 
 <%- include('partials/footer'); -%>

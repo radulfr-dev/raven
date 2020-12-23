@@ -70,4 +70,10 @@ body .main-menu a:hover {
   background-color: orange;
 }
 
+.top-up-menu .col form .form-options {
+  display: none;
+  opacity: 0;
+  color: white;
+}
+
 /*# sourceMappingURL=styles.css.map */
