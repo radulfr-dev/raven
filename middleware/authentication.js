@@ -7,6 +7,11 @@ function Authentication(){
 
         if(!req.session.user && !process.env.DEV) return res.redirect('/login');
 
+        res.locals.userInfo = {
+            username: req.session.user['username'],
+            role: req.session.user['role']
+        };
+
         next();
 
     }

@@ -1,0 +1,22 @@
+<div class="logo-row row">
+    <div class="col">
+        <div class="user-details">
+            <% if(userInfo.username){
+             %>
+             <p>Logged in as: <%= userInfo.username %></p>
+             <%
+             } %>
+             <% if(userInfo.role && userInfo.role  === 'admin'){
+             %>
+             <p>ADMIN PRIVILEGES</p>
+             <%
+             }%>
+        </div>
+    </div>
+    <div class="col">
+        <h1>Raven</h1>
+    </div>
+    <div class="col">
+        <a class="logout-button" href="/logout">Logout</a>
+    </div>
+</div>

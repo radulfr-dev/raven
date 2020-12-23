@@ -29,13 +29,17 @@ body .logo-row .col h1 {
   text-align: center;
   letter-spacing: 20px;
 }
-body .logo-row .col:nth-child(3) {
+body .logo-row .col:nth-child(odd) {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
 }
-body .logo-row .col:nth-child(3) .logout-button {
+body .logo-row .col:nth-child(odd) .user-details p {
+  text-align: center;
+  color: white;
+}
+body .logo-row .col:nth-child(odd) .logout-button {
   display: inline-block;
   padding: 15px;
   background-color: orange;

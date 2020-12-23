@@ -28,11 +28,17 @@ body {
             text-align: center;
             letter-spacing: 20px;
         }
-        &:nth-child(3){
+        &:nth-child(odd){
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: row;
+            .user-details {
+                p {
+                    text-align: center;
+                    color: white;
+                }
+            }
             .logout-button {
                 display: inline-block;
                 padding: 15px;
