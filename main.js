@@ -4,13 +4,19 @@ const app = express();
 const ravenDb = require('./database/database.js');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const session = require('express-session');
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({extended: false}));
 
 app.use(express.json());
+app.use(session({
+    secret: process.env.ACCESS_TOKEN_SECRET,
+    resave: false,
+    saveUninitialized: false
+}));
 
-app.get('/', authenticateToken, function(req, res){
+app.get('/', checkUserIsAuthorized, function(req, res){
     res.render('index');
 });
 
@@ -42,9 +48,7 @@ app.post('/login', async function(req, res){
 
     try{
         if(await bcrypt.compare(req.body.password, user.password)){
-            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-            //res.json({ accessToken: accessToken });
-            res.cookie('auth', accessToken, { httpOnly: true, secure: false });
+            req.session.user = user;
             res.redirect('/');
         }else{
             res.send('Not Allowed');
@@ -57,16 +61,12 @@ app.post('/login', async function(req, res){
 
 });
 
-function authenticateToken(req, res, next){
+function checkUserIsAuthorized(req, res, next){
 
-    const token = req.cookies['auth'];
-    if(token == null) return res.sendStatus(401);
+    if(!req.session.user) return res.sendStatus(401);
 
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-        if(err) return res.sendStatus(403);
-        req.user = user;
-        next();
-    })
+    next();
+
 }
 
 app.post('/register', async function(req, res){
