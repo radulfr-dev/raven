@@ -1,9 +1,14 @@
 require('dotenv').config();
+
 const express = require('express');
-const app = express();
-const ravenDb = require('./database/database.js');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
+
+const ravenDb = require('./database/database.js');
+const authentication = require('./middleware/authentication.js');
+
+const app = express();
+
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({extended: false}));
@@ -15,7 +20,7 @@ app.use(session({
     saveUninitialized: false
 }));
 
-app.get('/', checkUserIsAuthorized, function(req, res){
+app.get('/', authentication.checkUserIsAuthorized, function(req, res){
     res.render('index');
 });
 
@@ -80,17 +85,8 @@ app.post('/login', async function(req, res){
 
 });
 
-function checkUserIsAuthorized(req, res, next){
-
-    if(!req.session.user && !process.env.DEV) return res.sendStatus(401);
-
-    next();
-
-}
-
 app.post('/register', async function(req, res){
     try {
-
         const salt = await bcrypt.genSalt();
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
         const user = {
