@@ -9,3 +9,21 @@ test('getAsgardianActiveLikes returns array of objects', async () => {
         ])
     );
 });
+
+test('getAsgardianActiveViews returns array of objects', async () => {
+    let asgardianActiveViews = await servicesController.getAsgardianActiveViews();
+    expect(asgardianActiveViews).toEqual(
+        expect.arrayContaining([
+            expect.any(Object)
+        ])
+    );
+});
+
+test('getAsgardianActiveSaves returns array of objects', async () => {
+    let asgardianActiveSaves = await servicesController.getAsgardianActiveSaves();
+    expect(asgardianActiveSaves).toEqual(
+        expect.arrayContaining([
+            expect.any(Object)
+        ])
+    );
+});

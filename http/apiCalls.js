@@ -12,7 +12,31 @@ function apiCalls(){
                 });
         });
     }   
-    return { fetchAsgardianActiveLikes };
+
+    function fetchAsgardianActiveViews(){
+        return new Promise((resolve, reject) => {
+            axios.get('https://asgard.goso.space/api/services/4/1')
+                .then(function(response){
+                    resolve(response);
+                })
+                .catch(function(error){
+                    reject(error);
+                });
+        });
+    }   
+
+    function fetchAsgardianActiveSaves(){
+        return new Promise((resolve, reject) => {
+            axios.get('https://asgard.goso.space/api/services/5/1')
+                .then(function(response){
+                    resolve(response);
+                })
+                .catch(function(error){
+                    reject(error);
+                });
+        });
+    }   
+    return { fetchAsgardianActiveLikes, fetchAsgardianActiveViews, fetchAsgardianActiveSaves };
 }
 
 module.exports = apiCalls();

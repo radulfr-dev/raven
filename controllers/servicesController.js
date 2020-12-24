@@ -16,7 +16,36 @@ function ServicesController(){
             ];
         }
     }
-    return { getAsgardianActiveLikes };
+
+    async function getAsgardianActiveViews(){
+        try {
+            let asgardianActiveViews = await apiCalls.fetchAsgardianActiveViews();
+            return asgardianActiveViews;
+        }catch(error){
+            return [
+                {
+                    "error": true,
+                    "errorMessage": error.message
+                }
+            ];
+        }
+    }
+
+    async function getAsgardianActiveSaves(){
+        try {
+            let asgardianActiveSaves = await apiCalls.fetchAsgardianActiveSaves();
+            return asgardianActiveSaves;
+        }catch(error){
+            return [
+                {
+                    "error": true,
+                    "errorMessage": error.message
+                }
+            ];
+        }
+    }
+
+    return { getAsgardianActiveLikes, getAsgardianActiveViews, getAsgardianActiveSaves  };
 }
 
 module.exports = ServicesController();
