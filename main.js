@@ -58,6 +58,10 @@ app.post('/register', authentication.registerUser, function(req, res){
     res.redirect('/login');
 });
 
+app.post('/top-up-form', function(req, res){
+    res.redirect('/');
+});
+
 // Start server
 // ===========================
 

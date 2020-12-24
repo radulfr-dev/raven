@@ -7,7 +7,7 @@
     <div class="top-up-menu row">
 
         <div class="col">
-            <form>
+            <form action="/top-up-form" method="POST">
                 <div class="form-group">
                     <label for="post-url">Post URL</label>
                     <input type="text" class="form-control" id="post-url">
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <div class="asgardian-button-wrapper">
-                        <button class="btn btn-primary" id="asgardian-services-order">Order Asgardian Services</button>
+                        <button type="submit" class="btn btn-primary" id="asgardian-services-order">Order Asgardian Services</button>
                     </div>
                 </div>
                 <div class="form-options form-group" id="manual">
