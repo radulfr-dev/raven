@@ -5,15 +5,16 @@ function Authentication(){
 
     function checkUserIsAuthorized(req, res, next){
 
-        if(!req.session.user && !process.env.DEV) return res.redirect('/login');
+        console.log(req.session.user);
+        console.log(process.env.DEV);
+        console.log(!req.session.user && !process.env.DEV);
 
-        if(!process.env.DEV){
+        if(!req.session.user) return res.redirect('/login');
+
             res.locals.userInfo = {
                 username: req.session.user['username'],
                 role: req.session.user['role']
             };
-        }
-
 
         next();
 

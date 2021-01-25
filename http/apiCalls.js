@@ -36,7 +36,19 @@ function apiCalls(){
                 });
         });
     }   
-    return { fetchAsgardianActiveLikes, fetchAsgardianActiveViews, fetchAsgardianActiveSaves };
+
+    function fetchAsgardianActiveImpressions(){
+        return new Promise((resolve, reject) => {
+            axios.get('https://asgard.goso.space/api/services/6/1')
+                .then(function(response){
+                    resolve(response);
+                })
+                .catch(function(error){
+                    reject(error);
+                });
+        });
+    }   
+    return { fetchAsgardianActiveLikes, fetchAsgardianActiveViews, fetchAsgardianActiveSaves, fetchAsgardianActiveImpressions };
 }
 
 module.exports = apiCalls();

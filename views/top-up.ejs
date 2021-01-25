@@ -10,13 +10,12 @@
             <form action="/top-up-form" method="POST">
                 <div class="form-group">
                     <label for="post-url">Post URL</label>
-                    <input type="text" class="form-control" id="post-url">
+                    <input type="text" class="form-control" id="post-url" name="postUrl">
                 </div> 
                 <div class="form-group">
                     <label for="top-up-mode">Top-Up Mode</label>
                     <select class="form-control" id="top-up-mode">
                         <option disabled selected value>Select an option</option>
-                        <option class="top-up-mode-option">Subscription</option>
                         <option class="top-up-mode-option">Use Asgardian Services</option>
                         <option class="top-up-mode-option">Manual</option>
                     </select>
@@ -45,7 +44,7 @@
                         <div class="row">
                             <div class="col">
                                 <label for="asgardian-likes-quantity">No. of likes</label>
-                                <input type="text" class="form-control" id="asgardian-likes-quantity" value="0">
+                                <input type="text" class="form-control" id="asgardian-likes-quantity" value="0" name="asgardianLikes">
                             </div>
                         </div>
                     </div>
@@ -53,7 +52,7 @@
                         <div class="row">
                             <div class="col">
                                 <label for="asgardian-views-quantity">No. of views</label>
-                                <input type="text" class="form-control" id="asgardian-views-quantity" value="0">
+                                <input type="text" class="form-control" id="asgardian-views-quantity" value="0" name="asgardianViews">
                             </div>
                         </div>
                     </div>
@@ -61,7 +60,7 @@
                         <div class="row">
                             <div class="col">
                                 <label for="asgardian-saves-quantity">No. of saves</label>
-                                <input type="text" class="form-control" id="asgardian-saves-quantity" value="0">
+                                <input type="text" class="form-control" id="asgardian-saves-quantity" value="0" name="asgardianSaves">
                             </div>
                         </div>
                     </div>
@@ -69,7 +68,7 @@
                         <div class="row">
                             <div class="col">
                                 <label for="asgardian-impressions-quantity">No. of impressions</label>
-                                <input type="text" class="form-control" id="asgardian-impressions-quantity" value="0">
+                                <input type="text" class="form-control" id="asgardian-impressions-quantity" value="0" name="asgardianImpressions">
                             </div>
                         </div>
                     </div>

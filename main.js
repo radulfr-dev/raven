@@ -7,6 +7,8 @@ const session = require('express-session');
 const ravenDb = require('./database/database.js');
 const authentication = require('./middleware/authentication.js');
 
+const OrdersController = require('./controllers/ordersController.js');
+
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -59,7 +61,7 @@ app.post('/register', authentication.registerUser, function(req, res){
 });
 
 app.post('/top-up-form', function(req, res){
-    res.redirect('/');
+    OrdersController.processAsgardianTopUp(req.body);
 });
 
 // Start server

@@ -6,7 +6,7 @@ function ServicesController(){
     async function getAsgardianActiveLikes(){
         try {
             let asgardianActiveLikes = await apiCalls.fetchAsgardianActiveLikes();
-            return asgardianActiveLikes;
+            return asgardianActiveLikes.data;
         }catch(error){
             return [
                 {
@@ -20,7 +20,7 @@ function ServicesController(){
     async function getAsgardianActiveViews(){
         try {
             let asgardianActiveViews = await apiCalls.fetchAsgardianActiveViews();
-            return asgardianActiveViews;
+            return asgardianActiveViews.data;
         }catch(error){
             return [
                 {
@@ -34,7 +34,21 @@ function ServicesController(){
     async function getAsgardianActiveSaves(){
         try {
             let asgardianActiveSaves = await apiCalls.fetchAsgardianActiveSaves();
-            return asgardianActiveSaves;
+            return asgardianActiveSaves.data;
+        }catch(error){
+            return [
+                {
+                    "error": true,
+                    "errorMessage": error.message
+                }
+            ];
+        }
+    }
+    
+    async function getAsgardianActiveImpressions(){
+        try {
+            let asgardianActiveImpressions = await apiCalls.fetchAsgardianActiveImpressions();
+            return asgardianActiveImpressions.data;
         }catch(error){
             return [
                 {
@@ -45,7 +59,7 @@ function ServicesController(){
         }
     }
 
-    return { getAsgardianActiveLikes, getAsgardianActiveViews, getAsgardianActiveSaves  };
+    return { getAsgardianActiveLikes, getAsgardianActiveViews, getAsgardianActiveSaves, getAsgardianActiveImpressions };
 }
 
 module.exports = ServicesController();

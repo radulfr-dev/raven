@@ -1,5 +1,6 @@
 jest.mock('../../http/apiCalls');
 const servicesController = require('../../controllers/servicesController.js');
+const ordersController = require('../../controllers/ordersController.js');
 
 test('getAsgardianActiveLikes returns array of objects', async () => {
     let asgardianActiveLikes = await servicesController.getAsgardianActiveLikes();
@@ -27,3 +28,13 @@ test('getAsgardianActiveSaves returns array of objects', async () => {
         ])
     );
 });
+
+test('getAsgardianActiveImpressions returns array of objects', async () => {
+    let asgardianActiveImpressions = await servicesController.getAsgardianActiveImpressions();
+    expect(asgardianActiveImpressions).toEqual(
+        expect.arrayContaining([
+            expect.any(Object)
+        ])
+    );
+});
+
